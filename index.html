@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tile Map with Player</title>
+    <style>
+      body {
+        background-color: grey;
+        padding: 0;
+        margin: 2px;
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%);
+      }
+      canvas {
+        display: block;
+        margin: 0 auto;
+        background-color: lightgrey;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="gameCanvas"></canvas>
+    <script src="etc/global.js"></script>
+    <script src="etc/shortcutFunctions.js"></script>
+    <script src="etc/collision.js"></script>
+    <script src="entities/class.js"></script>
+    <script src="entities/assignEntities.js"></script>
+    <script src="entities/init.js"></script>
+    <script src="etc/fetchData.js"></script>
+    <script src="entities/loadImages.js"></script>
+    <script src="etc/drawMap.js"></script>
+    <script src="etc/animate_debug.js"></script>
+
+    <script src="main.js"></script>
+  </body>
+</html>

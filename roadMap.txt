@@ -1,0 +1,17 @@
+roadmap of my game development
+
+1 create a spriteSheet tile images
+2 create a map using tiled sofware
+3 export it in json file and import to the project
+4 create a class before generating its requierd  entities such as players 
+  ,enemys,tiles etc
+5 import to the etc/fetch.js it will generate the 
+  required data such as players
+  maps,emenys,platforms rects etc and assigin 
+6 draw and check all the items  on the canvas...
+7 create a collision detection system...(  WORKING..)
+8 player tracking camera
+
+
+
+
