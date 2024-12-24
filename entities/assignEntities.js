@@ -19,9 +19,6 @@
             if (p.name === "player") {
               player = new Player(p);
               
-               player.y=30*13.7;
-               player.h=30;
-               player.w=30;
                player.controllerEvent();
        
             }
@@ -29,12 +26,24 @@
         }
         //WALL
         if (data.name === "collision") {
+        
           data.objects.forEach((obj) => {
+           
             if (obj.name == "wall") {
-              Walls.push(new Wall(obj));
+            obj=change(obj); 
+              // Walls.forEach(e=>{
+              //   e.x=camera.x+e.x/SCALE+TILE_WIDTH
+              //   e.y=camera.y+e.y/SCALE
+
+              //   e.w/=SCALE;
+              //   e.h/=SCALE;
+              // })
+        
+
             }
             //PLATFORMS
             if (obj.name === "platform") {
+              obj=change(obj); 
               Platforms.push(new Platform(obj));
             }
             //DOORS
@@ -44,6 +53,7 @@
   
             //EMEMYS
             if (obj.name === "enemy") {
+              obj=change(obj); 
               Enemys.push(new Enemy(obj));
             }
 
@@ -56,6 +66,9 @@
           });
         }
       });
+         
+
+  
 
       init();
 

@@ -301,7 +301,7 @@
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.2",
- "tileheight":100,
+ "tileheight":32,
  "tilesets":[
         {
          "columns":6,
@@ -316,7 +316,7 @@
          "tileheight":100,
          "tilewidth":100
         }],
- "tilewidth":100,
+ "tilewidth":32,
  "type":"map",
  "version":"1.10",
  "width":20

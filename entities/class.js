@@ -10,7 +10,8 @@ class Box {
       this.w = 100;
       this.h = 100;
     }
-    this.visible = true;
+    this.visible = true ;
+    this.camera=camera;
   }
 }
 //PLAYER
@@ -30,6 +31,7 @@ class Player extends Box {
     this.gravity = 0.2;
     this.speed = 5;
     this.fireRate = 10;
+    this.collisionSide = null;
   }
   draw() {
     context.fillStyle = "blue";
@@ -46,61 +48,117 @@ class Player extends Box {
     }
   }
   move() {
-
-  if(this.keys.up){this.y-=this.speed;}
-  if(this.keys.left)this.x-=this.speed;
-  if(this.keys.right)this.x+=this.speed;
-  if(this.keys.down)this.y+=this.speed;
+    if (this.keys.up) {
+      this.y -= this.speed;
+    }
+    if (this.keys.left){
+       this.x -= this.speed;
+       
+      }
+    if (this.keys.right) this.x += this.speed;
+    if (this.keys.down) this.y += this.speed;
   }
-
+  collisionWithRect(rect) {
+    // Calculate the center differences between the two rectangles
+    const diffx = (this.x + this.w / 2) - (rect.x + rect.w / 2);
+    const diffy = (this.y + this.h / 2) - (rect.y + rect.h / 2);
+  
+    // Combined half sizes
+    const combinedHalfWidths = (this.w + rect.w) / 2;
+    const combinedHalfHeights = (this.h + rect.h) / 2;
+  
+    // Check if there's a collision
+    if (Math.abs(diffx) <= combinedHalfWidths && Math.abs(diffy) <= combinedHalfHeights) {
+      // Calculate overlap in both x and y axes
+      const overlapX = combinedHalfWidths - Math.abs(diffx);
+      const overlapY = combinedHalfHeights - Math.abs(diffy);
+  
+      // Determine the smallest overlap and adjust the player's position accordingly
+      if (overlapX < overlapY) {
+        // Horizontal collision
+      if(this.x<rect.x){
+        this.x-=overlapX;
+        return 'left'
+      }else{
+        this.x+=overlapX;
+        return 'right'
+      }
+      } else {
+        // Vertical collision
+         if(this.y<rect.y){
+          this.y-=overlapY;
+          return 'top'
+         }else{
+          this.y+=overlapY;
+          return 'bottom';
+         }
+      }
+    }
+  
+    return null; // No collision
+  }
+  collisionWithArrayOfRect(arryRect) {
+    arryRect.forEach(rect => {
+      const side = this.collisionWithRect(rect);
+      if (side === 'bottom') {
+        this.onGround = true;
+      }
+    });
+  }
   update() {
     this.move();
     if (this.visible) this.draw();
   }
 
   controllerEvent() {
-  
-    document.addEventListener("keydown", (e) => {
+    document.addEventListener(
+      "keydown",
+      (e) => {
+        e.preventDefault();
+        switch (e.key) {
+          case "ArrowUp":
+            this.keys.up = true;
+            break;
+          case "ArrowDown":
+            this.keys.down = true;
+            break;
+          case "ArrowLeft":
+            this.keys.left = true;
+            break;
+          case "ArrowRight":
+            this.keys.right = true;
+            break;
+          case " ":
+            this.keys.fire = true;
+            break;
+        }
+      },
+      { passive: false }
+    );
 
-      e.preventDefault();
-      switch (e.key) {
-        case "ArrowUp":
-          this.keys.up = true;
-          break;
-        case "ArrowDown":
-          this.keys.down = true;
-          break;
-        case "ArrowLeft":
-          this.keys.left = true;
-          break;
-        case "ArrowRight":
-          this.keys.right = true;
-          break;
-        case " ":
-          this.keys.fire = true;
-          break;
-      }
-    },{passive:false});
-
-    document.addEventListener("keyup", (e) => {
-      switch (e.key) {
-        case "ArrowUp":
-          this.keys.up = false;
-          break;
-        case "ArrowDown":
-          this.keys.down = false;
-          break;
-        case "ArrowLeft":
-          this.keys.left = false;
-          break;
-        case "ArrowRight":
-          this.keys.right = false;
-          break;
-        case " ":
-          this.keys.fire = false;
-          break;
-      }
-    },{passive:false});
+    document.addEventListener(
+      "keyup",
+      (e) => {
+        switch (e.key) {
+          case "ArrowUp":
+            this.keys.up = false;
+            break;
+          case "ArrowDown":
+            this.keys.down = false;
+            break;
+          case "ArrowLeft":
+            this.keys.left = false;
+            break;
+          case "ArrowRight":
+            this.keys.right = false;
+            break;
+          case " ":
+            this.keys.fire = false;
+            break;
+        }
+      },
+      { passive: false }
+    );
   }
 }
 //EMEMY
@@ -127,8 +185,9 @@ class Wall extends Box {
   }
   draw() {
     context.save();
-    context.fillStyle = "black";
+    context.fillStyle = "red";
     context.globalAlpha = 0.5;
+    context.fillRect(this.y,this.x,this.h,this.w);
     context.restore();
   }
   update() {
@@ -139,14 +198,13 @@ class Wall extends Box {
 class Platform extends Box {
   constructor(rect) {
     super(rect);
-    this.color = "green";
+    this.color = "brown";
   }
   draw() {
     context.save();
     context.fillStyle = this.color;
-    context.fillRect(this.x, this.y, this.h, this.w);
+    context.fillRect(this.x, this.y,this.w,this.h );
     context.restore();
-    
   }
   update() {
     if (this.visible) this.draw();

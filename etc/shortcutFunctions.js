@@ -32,3 +32,11 @@ function getXY(number,column){
   const y=Math.floor((number-1)/column);
   return {x,y}
 }
+function change(obj){
+  obj.x=camera.x+obj.x/SCALE+TILE_HEIGHT
+             obj.y=camera.y+obj.y/SCALE
+             obj.width/=SCALE
+             obj.height/=SCALE;
+              Walls.push(new Wall(obj));
+  return obj
+}

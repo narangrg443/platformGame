@@ -1,0 +1,16 @@
+InitializeGame(){
+    load images; load map
+
+    startGame(loaded_images,loadedMap){
+        animate(){
+            update(){
+                if(mapNo changed create new map){}
+                screen1=
+                screen2=
+            }
+            draw(){
+
+            }
+        }
+    }
+}

@@ -9,7 +9,7 @@ roadmap of my game development
   required data such as players
   maps,emenys,platforms rects etc and assigin 
 6 draw and check all the items  on the canvas...
-7 create a collision detection system...(  WORKING..)
+7 create a collision detection system,physic,etc...(  WORKING..)
 8 player tracking camera
 
 

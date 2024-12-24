@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Player Jump and Hang</title>
+    <style>
+        canvas { background-color: #eee; display: block; margin: 0 auto; }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas" width="800" height="400"></canvas>
+    <script type="module">
+        const canvas = document.getElementById("gameCanvas");
+        const context = canvas.getContext("2d");
+        import collision2Rect from '../modules/physic.js';
+        import Vector from '../modules/vector.js';
+     
+         const velocity=new Vector(4,0);
+         const gravity=new Vector(0,0.2);
+
+         const player={
+            x:canvas.width/2,
+            y:canvas.height-100,
+            w:100,
+            width:100,
+            sx:this.x,
+            sy:this.y,
+            sw:this.w,
+            sh:this.h,
+            cx:this.x,
+            cy:this.y,
+            cw:this.w,
+            ch:this.h,
+
+         drawSprite(){
+
+            },
+        drawRect(){
+            context.beginPath();
+            context.rect(this.cx,this.cy,this.cw,this.ch);
+            context.strokeStyle='red';
+            context.stroke();
+        },
+         }
+
+
+
+    </script>
+</body>
+</html>

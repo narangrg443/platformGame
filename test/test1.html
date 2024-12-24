@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
+    <title>Fullscreen Canvas</title>
+    <style>
+       body {
+        margin: 0;
+        overflow: hidden;
+        background-color: #444;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        flex-direction: column;
+      }
+      canvas {
+        border: 1px dashed yellow;
+      }
+    
+      .btn {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #3498db;
+        color: white;
+        font-size: 20px;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+      }
+      .btn:hover {
+        background-color: #2980b9;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+    <button id="playBtn" class="btn">Play</button>
+    <script type="module">
+        const playBtn=document.getElementById('playBtn');
+            
+
+        async function sum() {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(24);
+        }, 3000);
+    });
+}
+
+(async () => {
+    const s = await sum();
+    console.log(s); // Logs 24 after 1 second
+    console.log(12); // Logs 12 immediately after logging 24
+})();
+console.log(55)
+    </script>
+  </body>
+</html>

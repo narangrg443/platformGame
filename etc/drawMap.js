@@ -1,5 +1,5 @@
 
-async function drawMap() {
+function drawMap() {
 
     //DRAW TILE   map
       ImageObj.forEach(data => {
